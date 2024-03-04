@@ -1,24 +1,13 @@
-# README
+*Print.io
+This is a blog application built with Ruby on Rails 6, designed with Tailwind CSS, and focused on the world of 3D printing. It allows users to create, read, update, and delete (CRUD) articles and comments, ensuring a comprehensive and professional experience.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Features
+CRUD operations: Create, read, update, and delete articles and comments.
+Tailwind CSS integration: Provides a modern and responsive design framework.
+Emoji support: Enhance your content with expressive emojis.
+RSpec testing: Ensures code quality and functionality through automated tests.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Technologies
+*** Backend: Ruby on Rails 6
+*** Frontend: Tailwind CSS
+*** Testing: RSpec

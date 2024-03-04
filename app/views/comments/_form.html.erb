@@ -1,0 +1,31 @@
+
+
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+<div class="items-start space-y-4 mt-6 w-full">
+<div>
+    <p>
+      <%= form.label :commenter , class: "block font-medium text-gray-700 dark:text-gray-200 mb-2" %><br>
+      <%= form.text_field :commenter, class: "w-full px-3 py-2 rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm outline-none", placeholder: "Your Name" %>
+    </p>
+</div>
+<div>
+    <p>
+      <%= form.label :body , class: "block font-medium text-gray-700 dark:text-gray-200 mt-4"%><br>
+      <%= form.text_area :body, class: "w-full px-3 py-2 h-40 rounded-md border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm outline-none", placeholder: "Leave a comment..."%>
+    </p>
+</div>
+<div class="mt-4">
+  <div class="mt-1 text-black">
+        <%= form.label :status, class: 'block text-gray-700 text-md font-bold ' %><br>
+
+    <%= form.select :status, Visible::VALID_STATUSES, { selected: 'public'}, class: 'form-select w-full px-3 py-2 border rounded-md shadow-black shadow-lg'%>
+  </div>
+</div>
+<div class="flex justify-end">
+    <p>
+      <%= form.submit "Comment" ,class: "inline-flex items-center px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-700 font-medium" %>
+    </p>
+</div>
+</div>
+  <% end %>
+

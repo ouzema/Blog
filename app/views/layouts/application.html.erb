@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_include_tag "https://cdn.tailwindcss.com" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+
+    <div class ="py-12 gap-8 sm:py-28 flex items-center justify-center bg-gradient-to-t from-indigo-200 dark:from-slate-800 dark:to-slate-900 relative overflow-hidden min-h-screen">
+      <nav class="w-full fixed top-0 bg-white z-10 shadow-md dark:bg-slate-900 flex justify-between items-center px-4 py-2">
+        <div class="flex items-center gap-2">
+          <%= image_tag('logo.png' , class:"w-8 h-8 rounded-full") %>
+          <%= link_to "Print.io", root_path , class:"text-2xl font-bold text-indigo-900 dark:text-white" %>
+        </div>
+
+        <ul class="hidden md:flex space-x-4">
+          <li class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+            <%= link_to "Home", root_path %>
+          </li>
+          <% if user_signed_in? %>
+            <li class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+              <%= link_to "Articles", articles_path %>
+            </li>
+          <% end %>
+          <li class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+            <%= link_to "Contact", contact_path %>
+          </li>
+        </ul>
+
+        <div class="flex items-center space-x-2">
+          <% if user_signed_in? %>
+          <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
+             <% if user_signed_in? && current_user.profile_picture.attached? %>
+              <%= image_tag current_user.profile_picture, class: "w-8 h-8 rounded-full mr-2", alt: "Profile Picture" %>
+            <% else %>
+              <%= image_tag "https://shop.ambacaftermarket.com//themes/ambac/images/user-edit.svg", class: "w-8 h-8 rounded-full mr-2", alt: "Default Profile Picture" %>
+            <% end %>
+            <%= link_to current_user&.username, edit_user_registration_path, class:"font-semibold text-xl" %>
+
+            <ul id="about-dropdown" class="absolute hidden top-full right-0 z-40 rounded shadow-md bg-white py-2 px-4 text-gray-700"> 
+                        <li class="block mb-2 hover:bg-gray-100"> 
+                            <%= link_to "Edit Profile", edit_user_registration_path%>
+                        </li>
+                        <li class="block mb-2 hover:bg-gray-100">
+                            <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                        </li>
+                    </ul>
+          </div>
+          <% else %>
+            <ul class="flex space-x-2">
+              <li class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+                <%= link_to "Sign up", new_user_registration_path %>
+              </li>
+        <li class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+          <%= link_to "Log in", new_user_session_path %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div id="hamburger" class="md:hidden cursor-pointer z-20">
+      <div class="w-6 h-0.5 bg-black"></div>
+      <div class="w-6 h-0.5 bg-black"></div>
+      <div class="w-6 h-0.5 bg-black"></div>
+    </div>
+    <ul
+      id="menu"
+      class="hidden bg-indigo-300 absolute left-0 top-0 w-full p-10 rounded-b-3xl space-y-10 text-white text-center"
+    >
+      <li>
+        <%= link_to "Home", root_path %>
+      </li>
+      <li>
+        <%= link_to "Articles", articles_path %>
+      </li>
+      <li>
+        <%= link_to "Contact", contact_path %>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      <main>  
+          <%= yield %>
+      </main>
+    </div>
+
+<script>
+  function previewImage(input) {
+    var preview = document.getElementById('profile_picture_preview');
+    var file = input.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  }
+</script>
+
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById('about-dropdown');
+    dropdown.classList.toggle('hidden');
+  }
+</script>
+
+<script>
+  hamburger.addEventListener("click", ()=>{
+  menu.classList.toggle("hidden")
+  hamburger.classList.toggle("bg-white")
+})
+  </script>
+
+  </body>
+</html>
+
